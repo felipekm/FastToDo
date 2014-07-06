@@ -1,0 +1,138 @@
+.unselectable {
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    cursor: w-resize;
+}
+
+.cssFade {
+    transition: 0.5s linear all;
+    opacity: 1;
+}
+.cssFade.ng-hide {
+    opacity: 0;
+}
+
+.topcoat-navigation-bar {
+    z-index: 10;
+}
+
+.scroller {
+    overflow: auto;
+    -webkit-overflow-scrolling: touch;
+    position: absolute;
+    top: 98px;
+    bottom: 0px;
+    left: 0px;
+    right: 0px;
+    border: none;
+}
+
+.topcoat-list__container {
+    border-bottom: none;
+    clear: both;
+}
+
+#divToDo {
+    max-height: max-content;
+}
+ 
+.list {
+    position: absolute;
+    top: 4.35rem;
+    right: 0;
+    left: 0;
+    bottom: 0;
+}
+
+.topcoat-icon {
+    font-size: 1.55rem;
+}
+
+.topcoat-notification {    
+    background-color: rgb(231,134,33);
+    color: #fff;
+    float:right;
+    line-height: 14px;
+}
+
+#toBeDone {
+    max-width: 420px;
+}
+
+#todoItem {
+    overflow: hidden;
+}
+
+.toDoItem {
+    border-left: solid 1px black;
+    position: relative;    
+    background-color: #4b4d4e;
+    color: white;
+}
+
+.toDoItem label {
+    margin-left:-70px;
+}
+
+.doneToDoItem {
+    float:left;
+    padding: 5px;
+    background-color: #428bca;
+    width: 80px;
+    display: block;
+    height: 51px;
+    color: white;
+    text-align: center;
+    vertical-align: middle;
+    line-height: 50px;
+}
+
+.search-bar {
+}
+
+.search-bar input {    
+    width: 100%;
+    height: 80px;
+}
+
+.listSwitcher {
+    position: relative;    
+    width: 100%;    
+    background-color: #e5e9e8;
+}
+
+.buttonSwitcher {    
+    float:left;
+}
+
+/* Date Time */
+#ce-little-calendar {
+    position: fixed;
+    width: 100px;
+    margin: 0 auto;
+    font-family: "fira sans";
+}
+
+#ce-date-calendar {
+    top: -10px;
+    float: right;
+    position: relative;
+    text-align: center;
+    padding-bottom: 5px;
+    border-bottom: 1px solid rgb(231,134,33);
+}
+
+.ce-date-month {
+    text-transform: uppercase;
+    font-weight: 400;
+}
+
+.ce-date-day {
+    font-weight: 500;
+    padding: 0px;
+    line-height: 1em;
+}

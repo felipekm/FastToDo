@@ -1,0 +1,25 @@
+{
+    "version": "0.1.0",
+    "name": "FastToDo",
+    "launch_path": "/src/index.html",
+    "description": "A very fast way to organize daily tasks",
+    "icons": {
+        "16": "/images/fasttodo_16.png",
+        "32": "/images/fasttodo_32.png",
+        "64": "/images/fasttodo_64.png",
+        "96": "/images/fasttodo_96.png",
+        "128": "/images/fasttodo_128.png"
+    },
+    "developer": {
+        "name": "Felipe Kautzmann",
+        "url": "http://felipekm.com/"
+    },
+    "installs_allowed_from": ["*"],    
+    "default_locale": "en",
+    "locales": {
+        "en": {
+            "name": "FastToDo",
+            "description": "A very fast way to organize daily tasks"
+        }
+    }
+}

@@ -1,0 +1,68 @@
+<!-- HEADER -->
+<div class="full layout">
+
+    <div class="page page-center">
+
+        <div class="topcoat-navigation-bar ">
+            <div id="newTodo" class="topcoat-navigation-bar__item left quarter" data-ng-hide="isAddMode()" data-ng-click="openAdd()">
+                <button class="topcoat-icon-button--quiet" />
+                <span class="topcoat-icon icomatic">plus</span>
+            </div>
+
+            <div id="saveTodo" class="topcoat-navigation-bar__item left quarter" data-ng-show="isAddMode()" data-ng-click="saveNewItem()">
+                <button class="topcoat-icon-button--quiet" />
+                <span class="topcoat-icon icomatic">checkmark</span>            
+            </div>
+
+            <div class="topcoat-navigation-bar__item center half" ng-click="about()">Fast ToDo</h1>
+        </div>
+
+        <div id="cancelTodo" class="topcoat-navigation-bar__item right quarter" 
+             data-ng-show="isAddMode()" data-ng-click="saveNewItem('cancel')">
+            <button class="topcoat-icon-button--quiet" />
+            <span class="topcoat-icon icomatic">cancel</span>
+        </div>
+
+        <div id="deleteAllTodo" class="topcoat-navigation-bar__item right quarter" ng-click="deleteAll()"
+             data-ng-hide="todoList.length === 0">
+            <button class="topcoat-icon-button--quiet" />
+            <span class="topcoat-icon icomatic">delete</span>
+        </div>
+    </div>
+
+    <div class="search-bar">
+        <input id="txtTodo" type="text" placeholder="To Do Item" class="topcoat-text-input" style="width:100%;" maxlength="20"
+               focusme="isAddMode()" ng-model="modelTodo.description" ng-show="isAddMode()" ng-enter="saveNewItem()"/>
+    </div>
+
+    <div id="divToDo">
+        <h3 class="topcoat-list__header">Items Count
+            <span class="topcoat-notification">{{ itemsToBeDone() }}</span>
+        </h3>
+        <div class="topcoat-list__container scroller" ng-hide="isAddMode()">
+            <ul class="topcoat-list__container ">
+                <li ng-repeat="todo in todoList track by todo.id">
+
+                    <div id="todoItem" ng-hide="todo.isDone">
+
+                        <div class="doneToDoItem" ng-click="doneItem(todo.id)">Done</div>
+
+                        <div id="todoItem_{{todo.id}}" class="topcoat-list__item row between middle toDoItem unselectable" 
+                             ng-swipe-right="swipeItemToRight(todo.id)"
+                             ng-swipe-left="swipeItemToLeft(todo.id)">
+
+                            <label ng-bind="todo.description"></label>
+
+                            <div id="ce-date-calendar">
+                                <div class="ce-date-month">
+                                    <span ng-bind="todo.creationDate.month"></span></div>
+                                <div class="ce-date-day">
+                                    <span ng-bind="todo.creationDate.day"></span></div>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </div>   
+</div>
