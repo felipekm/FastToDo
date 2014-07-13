@@ -40,19 +40,14 @@
             <span class="topcoat-notification">{{ itemsToBeDone() }}</span>
         </h3>
         <div class="topcoat-list__container scroller" ng-hide="isAddMode()">
-            <ul class="topcoat-list__container ">
-                <li ng-repeat="todo in todoList track by todo.id">
-
+            
+            <ul class="topcoat-list__container "> <!-- ng-click="details()" -->
+                <li ng-repeat="todo in todoList track by todo.id" >
                     <div id="todoItem" ng-hide="todo.isDone">
-
                         <div class="doneToDoItem" ng-click="doneItem(todo.id)">Done</div>
-
                         <div id="todoItem_{{todo.id}}" class="topcoat-list__item row between middle toDoItem unselectable" 
-                             ng-swipe-right="swipeItemToRight(todo.id)"
-                             ng-swipe-left="swipeItemToLeft(todo.id)">
-
+                             ng-swipe-right="swipeItemToRight(todo.id)" ng-swipe-left="swipeItemToLeft(todo.id)">
                             <label ng-bind="todo.description"></label>
-
                             <div id="ce-date-calendar">
                                 <div class="ce-date-month">
                                     <span ng-bind="todo.creationDate.month"></span></div>

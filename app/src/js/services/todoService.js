@@ -5,9 +5,7 @@ angular.module("FastToDo").service("todoService", ["$rootScope", "$q", function 
 
     var toDo = [],
         self = this,
-        defer;
-
-    
+        defer;    
     
     this.save = function save(todo) {
         defer = $q.defer();

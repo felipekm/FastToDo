@@ -19,6 +19,8 @@
         
         $routeProvider.when("/home", { templateUrl: "partials/home.html", controller: "homeController"});
         $routeProvider.when("/about", { templateUrl: "partials/templates/about.html", controller: "aboutController"});
+        $routeProvider.when("/details", { templateUrl: "partials/templates/details.html", controller: "detailsController"});
+        
         $routeProvider.otherwise({ redirectTo: "/home" });        
         
     }]);
@@ -39,4 +41,5 @@
             window.screen.mozLockOrientation("portrait");
         }
     }]);
+    
 }());

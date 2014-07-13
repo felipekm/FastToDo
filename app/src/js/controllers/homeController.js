@@ -1,6 +1,6 @@
 /*global angular, console, confirm*/
 
-angular.module("FastToDo").controller("homeController", ["$scope", "$http", "$rootScope", 'todoService', function HomeController($scope, $http, $rootScope, todoService) {
+angular.module("FastToDo").controller("homeController", ["$scope", "$http", "$rootScope", 'todoService', function ($scope, $http, $rootScope, todoService) {
     'use strict';
 
     $scope.modelTodo = {
@@ -18,8 +18,12 @@ angular.module("FastToDo").controller("homeController", ["$scope", "$http", "$ro
     };
     
     $scope.about = function about() {
-        $scope.goTo('/about');    
+        $scope.goTo('/about');
     };
+    
+    $scope.details = function details() {
+        $scope.goTo('/details');
+    }
 
     $scope.isDeleteMode = function isDeleteMode() {
         return $rootScope.isDeleteMode;
@@ -51,8 +55,8 @@ angular.module("FastToDo").controller("homeController", ["$scope", "$http", "$ro
     };
 
     $scope.swipeItemToLeft = function swipeItemToLeft(todoId) {        
-        $('#todoItem_' + todoId).css('width', '90%').animate({
-            right: '+=90px',
+        $('#todoItem_' + todoId).animate({
+            right: '90px',
             left : '0px'
         }, 200).removeClass('opened');
     };
