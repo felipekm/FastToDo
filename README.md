@@ -1,6 +1,3 @@
-![Alt text](https://travis-ci.org/felipekm/FastToDo.svg?branch=master)
-
-
 ![Alt text](https://marketplace.cdn.mozilla.net/img/uploads/addon_icons/502/502825-64.png?raw=true "FastToDo") FastToDo
 ========
 The fastest way to organize daily tasks on your Firefox OS device.
