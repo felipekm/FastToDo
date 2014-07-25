@@ -3,7 +3,6 @@ var gulp = require('gulp')
 , minifyHtml= require('gulp-minify-html')
 , minifyCss = require('gulp-minify-css')
 , uglify = require("gulp-uglify")
-, concat = require('gulp-concat')
 , clean = require('gulp-clean');
 
 // MINIFY HTML
