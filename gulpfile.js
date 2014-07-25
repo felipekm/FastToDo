@@ -5,11 +5,7 @@ var gulp = require('gulp')
 , uglify = require("gulp-uglify")
 , clean = require('gulp-clean');
 
-// MINIFY HTML
-gulp.task('minify-html', function(){
-   
-});
-
+// Copy Files
 gulp.task('copy', function () {
     
     gulp.src('./app/manifest.webapp', { base: './app' })
@@ -25,14 +21,13 @@ gulp.task('copy', function () {
     .pipe(gulp.dest('./www/'));
 });
 
-// CLEAN
-
+// Clean
 gulp.task('clean', function () {
     gulp.src('./www/', {read: false})
     .pipe(clean());
 });
 
-// MINIFY
+// Grouped Minify
 gulp.task('minify', function () {
    
        gulp.src('./app/src/css/*.css')
@@ -45,11 +40,10 @@ gulp.task('minify', function () {
     
      gulp.src('./app/src/**/*.html')
         .pipe(minifyHtml())
-        .pipe(gulp.dest('www/src/'));
- 
+        .pipe(gulp.dest('www/src/')); 
 });
 
-
+// Gulp to run
 gulp.task('default', function () {
     gulp.start('clean', 'minify', 'copy');
 });
