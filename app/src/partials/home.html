@@ -14,11 +14,11 @@
                 <span class="topcoat-icon icomatic">checkmark</span>            
             </div>
 
-            <div class="topcoat-navigation-bar__item center half" ng-click="about()">Fast ToDo</h1>
+            <div class="topcoat-navigation-bar__item center half" ng-click="about()">{{headerTitle}}</h1>
         </div>
 
         <div id="cancelTodo" class="topcoat-navigation-bar__item right quarter" 
-             data-ng-show="isAddMode()" data-ng-click="saveNewItem('cancel')">
+             data-ng-show="isAddMode()" data-ng-click="cancelItem()">
             <button class="topcoat-icon-button--quiet" />
             <span class="topcoat-icon icomatic">cancel</span>
         </div>
@@ -29,13 +29,24 @@
             <span class="topcoat-icon icomatic">delete</span>
         </div>
     </div>
-
-    <div class="search-bar">
-        <input id="txtTodo" type="text" placeholder="To Do Item" class="topcoat-text-input" style="width:100%;" maxlength="20"
-               focusme="isAddMode()" ng-model="modelTodo.description" ng-show="isAddMode()" ng-enter="saveNewItem()"/>
+    
+    <div class="todo-form" ng-show="isAddMode()">
+        <div id="divToDoTitle">
+            <input id="txtToDoTitle" type="text" placeholder="Title" class="topcoat-text-input" maxlength="20" ng-focus="showRemaining('title')" ng-blur="showRemaining('title')"
+                focusme="isAddMode()" ng-model="modelTodo.title" ng-enter="saveNewItem()"/>
+            <p ng-show="isTitleRemainingVisible"><small class="chars-remaining">{{ -(modelTodo.title.length - 20) }} chars remaining..</small></p>
+        </div>
+        <div id="divToDo">
+            <p><small class="chars-remaining" ng-show="isDescriptionRemainingVisible">{{ -(modelTodo.description.length - 200) }} chars remaining..</small></p>
+            <textarea id="txtToDoDescription" class="topcoat-text-input" maxlength="200" type="text" rows="7" placeholder="Description" 
+                ng-model="modelTodo.description" ng-enter="saveNewItem()" ng-focus="showRemaining('description')" ng-blur="showRemaining('description')"></textarea>
+            
+        </div>
+        </br>
+       
     </div>
 
-    <div id="divToDo">
+    <div id="divToDo" ng-show="!isAddMode()">
         <h3 class="topcoat-list__header">Items Count
             <span class="topcoat-notification">{{ itemsToBeDone() }}</span>
         </h3>

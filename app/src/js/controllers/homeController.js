@@ -3,17 +3,22 @@
 angular.module("FastToDo").controller("homeController", ["$scope", "$http", "$rootScope", 'todoService', function ($scope, $http, $rootScope, todoService) {
     'use strict';
 
-    $scope.modelTodo = {
-        id: 0,
-        description : null,
-        creationDate : {
-            day : null,
-            month : null
-        },
-        isDone: false
-    }
-
+    $scope.modelTodo = {};
+    
+    $scope.headerTitle = "Fast ToDo";
+    
+    $scope.isTitleRemainingVisible = false;
+    $scope.isDescriptionRemainingVisible = false;
+    
+    $scope.showRemaining = function showRemaining (type) {
+        if (type === 'title') {
+            $scope.isTitleRemainingVisible = !$scope.isTitleRemainingVisible;
+        } else
+            $scope.isDescriptionRemainingVisible = !$scope.isDescriptionRemainingVisible;
+    } 
     $scope.isAddMode = function isAddMode() {
+        $scope.headerTitle = "New Item";
+        
         return $rootScope.isAddMode;
     };
     
@@ -60,16 +65,18 @@ angular.module("FastToDo").controller("homeController", ["$scope", "$http", "$ro
             left : '0px'
         }, 200).removeClass('opened');
     };
+    
+    $scope.cancelItem = function cancelItem() {
+        $scope.modelTodo = {};
+        $scope.isAddMode = false;
+        $scope.headerTitle = "Fast ToDo";
+        return;    
+    };
 
     $scope.saveNewItem = function saveNewItem(action) {
         $rootScope.isAddMode = false;
 
-        if (action === 'cancel') {
-            $scope.modelTodo = {};
-            return;
-        }
-
-        if ($scope.modelTodo.description) {
+        if ($scope.modelTodo.description && $scope.modelTodo.title) {
             $scope.modelTodo.id = $scope.todoList.length === 0 ? 1 : $scope.todoList.length + 1;
             $scope.modelTodo.isDone = false;
 

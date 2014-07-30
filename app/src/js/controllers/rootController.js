@@ -6,7 +6,6 @@ angular.module("FastToDo").controller("rootController", ["$rootScope", "$scope",
 
         $scope.isLayoutAnimated = false;
         $scope.isHeaderBackAllowed = false;
-        $scope.headerClass = 'full';
         $scope.isAddMode = false;
         $scope.isDeleteMode = false;
         
