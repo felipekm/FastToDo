@@ -15,10 +15,9 @@ angular.module("FastToDo").controller("homeController", ["$scope", "$http", "$ro
             $scope.isTitleRemainingVisible = !$scope.isTitleRemainingVisible;
         } else
             $scope.isDescriptionRemainingVisible = !$scope.isDescriptionRemainingVisible;
-    } 
-    $scope.isAddMode = function isAddMode() {
-        $scope.headerTitle = "New Item";
-        
+    };
+    
+    $scope.isAddMode = function isAddMode() {        
         return $rootScope.isAddMode;
     };
     
@@ -35,7 +34,7 @@ angular.module("FastToDo").controller("homeController", ["$scope", "$http", "$ro
     };
 
     $scope.openAdd = function openAdd() {
-        $rootScope.isAddMode = true;
+        $rootScope.isAddMode = !$rootScope.isAddMode;
     };
 
     $scope.openDelete = function openDelete() {
@@ -68,7 +67,7 @@ angular.module("FastToDo").controller("homeController", ["$scope", "$http", "$ro
     
     $scope.cancelItem = function cancelItem() {
         $scope.modelTodo = {};
-        $scope.isAddMode = false;
+        $rootScope.isAddMode = false;
         $scope.headerTitle = "Fast ToDo";
         return;    
     };

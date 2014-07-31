@@ -6,7 +6,7 @@ angular.module("FastToDo").controller("rootController", ["$rootScope", "$scope",
 
         $scope.isLayoutAnimated = false;
         $scope.isHeaderBackAllowed = false;
-        $scope.isAddMode = false;
+        $scope.isScopeAddMode = false;
         $scope.isDeleteMode = false;
         
         $rootScope.config = firetodoConfig;
