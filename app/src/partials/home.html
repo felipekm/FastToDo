@@ -33,7 +33,7 @@
     
     <div class="todo-form" ng-show="isAddMode()">
         <div id="divToDoTitle">
-            <input id="txtToDoTitle" type="text" placeholder="Title" class="topcoat-text-input" maxlength="20" 
+            <input id="txtToDoTitle" focusme type="text" placeholder="Title" class="topcoat-text-input" maxlength="20" 
                 ng-focus="showRemaining('title')" ng-blur="showRemaining('title')"
                 ng-model="modelTodo.title" ng-enter="saveNewItem()"/>
             <p><small ng-show="isTitleRemainingVisible" class="chars-remaining">{{ -(modelTodo.title.length - 20) }} chars remaining..</small></p>
@@ -42,7 +42,6 @@
             <p><small class="chars-remaining" ng-show="isDescriptionRemainingVisible">{{ -(modelTodo.description.length - 200) }} chars remaining..</small></p>
             <textarea id="txtToDoDescription" class="topcoat-text-input" maxlength="200" type="text" rows="7" placeholder="Description" 
                 ng-model="modelTodo.description" ng-enter="saveNewItem()" ng-focus="showRemaining('description')" ng-blur="showRemaining('description')"></textarea>
-            
         </div>
         </br>       
     </div>
@@ -55,9 +54,9 @@
             
             <ul class="topcoat-list__container ">
                 <li ng-repeat="todo in todoList track by todo.id" >
-                    <div id="todoItem" ng-hide="todo.isDone" ng-click="details(todo)">
-                        <div class="doneToDoItem" ng-click="doneItem(todo.id)">Done</div>
-                        <div id="todoItem_{{todo.id}}"  class="topcoat-list__item row between middle toDoItem unselectable" 
+                    <div id="todoItem" ng-hide="todo.isDone">
+                        <div class="doneToDoItem" ng-click="doneItem(todo)">Done</div>
+                        <div id="todoItem_{{todo.id}}" ng-click="details(todo)"  class="topcoat-list__item row between middle toDoItem unselectable" 
                              ng-swipe-right="swipeItemToRight(todo.id)" ng-swipe-left="swipeItemToLeft(todo.id)">
                             <label ng-bind="todo.title"></label>
                             <div id="ce-date-calendar">

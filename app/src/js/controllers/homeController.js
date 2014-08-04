@@ -151,8 +151,8 @@ angular.module("FastToDo").controller("HomeController", [
             }
         };
 
-        $scope.doneItem = function doneItem(todoId) {
-            todoService.done(todoId);
+        $scope.doneItem = function doneItem(todo) {
+            todoService.done(todo);
             $scope.todoList = todoService.getAll() || [];
         };
 

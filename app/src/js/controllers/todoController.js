@@ -1,4 +1,4 @@
-/*globals angular, console */
+/*globals angular, console, $ */
 
 angular.module("FastToDo").controller("ToDoController", [
     "$scope", "$rootScope", "todoService",
@@ -54,6 +54,7 @@ angular.module("FastToDo").controller("ToDoController", [
 
         function init() {
             $scope.toDo = todoService.getItem();
+            $('#txtToDoTitle').focus();
         }
 
         init();
