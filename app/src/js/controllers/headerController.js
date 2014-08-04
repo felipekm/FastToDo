@@ -1,9 +1,8 @@
 /*global angular, console, confirm*/
 
-angular.module('FastToDo').controller(
-    'headerController', 'todoService',
-
-    function ($scope) {
+angular.module('FastToDo').controller('HeaderController', [
+    'todoService',
+    function HeaderController($scope, todoService) {
         'use strict';
 
         $scope.isAddMode = false;
@@ -17,5 +16,4 @@ angular.module('FastToDo').controller(
             }
         };
 
-    }
-);
+    }]);

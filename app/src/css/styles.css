@@ -5,7 +5,7 @@
     -moz-user-select: none;
     -ms-user-select: none;
     user-select: none;
-    cursor: w-resize;
+    cursor: pointer;
 }
 
 .cssFade {
@@ -97,9 +97,7 @@ textarea {
 }
 
 .todo-form {
-    width: 300px;
-    margin-top: 10px;
-    margin-left: 10px;
+    padding: 10px;
 }
 
 .todo-form input {    

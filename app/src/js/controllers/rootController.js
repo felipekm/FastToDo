@@ -1,6 +1,6 @@
 /*global angular*/
 
-angular.module("FastToDo").controller("rootController", ["$rootScope", "$scope", "$location", "$timeout", "fasttodo.config", "storageFactory", "$window",
+angular.module("FastToDo").controller("RootController", ["$rootScope", "$scope", "$location", "$timeout", "fasttodo.config", "storageFactory", "$window",
     function RootController($rootScope, $scope, $location, $timeout, firetodoConfig, storageFactory, $window) {
         'use strict';
 

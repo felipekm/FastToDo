@@ -44,8 +44,7 @@
                 ng-model="modelTodo.description" ng-enter="saveNewItem()" ng-focus="showRemaining('description')" ng-blur="showRemaining('description')"></textarea>
             
         </div>
-        </br>
-       
+        </br>       
     </div>
 
     <div id="divToDo" ng-show="!isAddMode()">
@@ -54,13 +53,13 @@
         </h3>
         <div class="topcoat-list__container scroller" ng-hide="isAddMode()">
             
-            <ul class="topcoat-list__container "> <!-- ng-click="details()" -->
+            <ul class="topcoat-list__container ">
                 <li ng-repeat="todo in todoList track by todo.id" >
-                    <div id="todoItem" ng-hide="todo.isDone">
+                    <div id="todoItem" ng-hide="todo.isDone" ng-click="details(todo)">
                         <div class="doneToDoItem" ng-click="doneItem(todo.id)">Done</div>
-                        <div id="todoItem_{{todo.id}}" class="topcoat-list__item row between middle toDoItem unselectable" 
+                        <div id="todoItem_{{todo.id}}"  class="topcoat-list__item row between middle toDoItem unselectable" 
                              ng-swipe-right="swipeItemToRight(todo.id)" ng-swipe-left="swipeItemToLeft(todo.id)">
-                            <label ng-bind="todo.description"></label>
+                            <label ng-bind="todo.title"></label>
                             <div id="ce-date-calendar">
                                 <div class="ce-date-month">
                                     <span ng-bind="todo.creationDate.month"></span></div>
