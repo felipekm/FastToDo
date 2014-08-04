@@ -17,9 +17,9 @@
     // config time
     app.config(["$routeProvider", "$httpProvider", function AppConfig($routeProvider, $httpProvider) {
         
-        $routeProvider.when("/home", { templateUrl: "partials/home.html", controller: "homeController"});
-        $routeProvider.when("/about", { templateUrl: "partials/templates/about.html", controller: "aboutController"});
-        $routeProvider.when("/details", { templateUrl: "partials/templates/details.html", controller: "detailsController"});
+        $routeProvider.when("/home", { templateUrl: "partials/home.html", controller: "HomeController"});
+        $routeProvider.when("/about", { templateUrl: "partials/templates/about.html", controller: "AboutController"});
+        $routeProvider.when("/todo", { templateUrl: "partials/templates/todo.html", controller: "ToDoController"});
         
         $routeProvider.otherwise({ redirectTo: "/home" });        
         

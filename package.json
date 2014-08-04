@@ -1,22 +1,30 @@
 {
-    "name": "FastToDo",
-    "version": "0.1.1",
-    "description": "A very fast way to organize daily tasks",
-    "main": "index.js",
-    "scripts": {
-        "test": "echo \"Error: no test specified\" && exit 1"
-    },
-    "repository": {
-        "type": "git",
-        "url": "https://github.com/felipekm/FastToDo"
-    },
-    "keywords": [
-        "todo"
-    ],
-    "author": "Felipe Kautzmann",
-    "license": "ISC",
-    "bugs": {
-        "url": "https://github.com/felipekm/FastToDo/issues"
-    },
-    "homepage": "https://github.com/felipekm/FastToDo"
+  "name": "FastToDo",
+  "version": "0.2.0",
+  "description": "A very fast way to organize daily tasks",
+  "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/felipekm/FastToDo"
+  },
+  "keywords": [
+    "todo"
+  ],
+  "author": "Felipe Kautzmann",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/felipekm/FastToDo/issues"
+  },
+  "homepage": "https://github.com/felipekm/FastToDo",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "devDependencies": {
+    "gulp-util": "~3.0.0",
+    "gulp": "~3.8.6",
+    "gulp-minify-html": "~0.1.4",
+    "gulp-minify-css": "~0.3.7",
+    "gulp-uglify": "~0.3.1",
+    "gulp-clean": "~0.3.1"
+  }
 }
