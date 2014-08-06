@@ -84,7 +84,7 @@ angular.module("FastToDo").controller("HomeController", [
         $scope.saveNewItem = function saveNewItem() {
             $rootScope.isAddMode = false;
 
-            if ($scope.modelTodo.description && $scope.modelTodo.title) {
+            if ($scope.modelTodo.title) {
                 $scope.modelTodo.id = $scope.todoList.length === 0 ? 1 : $scope.todoList.length + 1;
                 $scope.modelTodo.isDone = false;
 
