@@ -9,6 +9,6 @@ angular.module("FastToDo").controller("detailsController", function ($scope) {
 
     $scope.back = function back() {
         $scope.goTo('/home');
-    }
+    };
 
 });

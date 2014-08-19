@@ -1,6 +1,6 @@
 {
   "name": "FastToDo",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "A very fast way to organize daily tasks",
   "main": "index.js",
   "repository": {
@@ -8,7 +8,7 @@
     "url": "https://github.com/felipekm/FastToDo"
   },
   "keywords": [
-    "todo"
+    "todo", "firefoxos", "todoapp", "task", "simple"
   ],
   "author": "Felipe Kautzmann",
   "license": "ISC",

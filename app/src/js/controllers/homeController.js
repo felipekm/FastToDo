@@ -5,15 +5,10 @@ angular.module("FastToDo").controller("HomeController", [
 
         'use strict';
 
-        $scope.modelTodo = {
-            id: 0,
-            title: null,
-            description : null,
-            creationDate : null
-        };
+        $scope.modelTodo = {};
+        $scope.todoList = {};
 
         $scope.headerTitle = "Fast ToDo";
-
         $scope.isTitleRemainingVisible = false;
         $scope.isDescriptionRemainingVisible = false;
 
@@ -58,6 +53,23 @@ angular.module("FastToDo").controller("HomeController", [
                 }
             }
             return count;
+        };
+
+        $scope.isAllDone = function isAllDone() {
+            var i ;
+
+            if ($scope.todoList.length === 0) {
+                return true;
+            }
+
+            for (i in $scope.todoList) {
+                if ($scope.todoList[i].isDone === false) {
+                    return false;
+                }
+            }
+
+            return true;
+
         };
 
         $scope.swipeItemToRight = function swipeItemToRight(todoId) {

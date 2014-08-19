@@ -25,7 +25,7 @@
         </div>
 
         <div id="deleteAllTodo" class="topcoat-navigation-bar__item right quarter" ng-click="deleteAll()"
-             data-ng-hide="todoList.length === 0">
+             data-ng-hide="isAllDone()">
             <button class="topcoat-icon-button--quiet" />
             <span class="topcoat-icon icomatic">delete</span>
         </div>
@@ -51,17 +51,23 @@
             <span class="topcoat-notification">{{ itemsToBeDone() }}</span>
         </h3>
         <div class="topcoat-list__container scroller" ng-hide="isAddMode()">
-            
             <ul class="topcoat-list__container ">
                 <li ng-repeat="todo in todoList track by todo.id" >
+                    <!-- TODO -->
                     <div id="todoItem" ng-hide="todo.isDone">
                         <div class="doneToDoItem" ng-click="doneItem(todo)">Done</div>
-                        <div id="todoItem_{{todo.id}}" ng-click="details(todo)"  class="topcoat-list__item row between middle toDoItem unselectable" 
-                             ng-swipe-right="swipeItemToRight(todo.id)" ng-swipe-left="swipeItemToLeft(todo.id)">
+                        <!-- BUTTON TODO UNDER SWIPE -->
+                        <div id="todoItem_{{todo.id}}" class="topcoat-list__item row between middle toDoItem unselectable"
+                             ng-swipe-left="swipeItemToLeft(todo.id)" ng-click="details(todo)"
+                             ng-swipe-right="swipeItemToRight(todo.id)">
+                            <!-- TITLE -->
                             <label ng-bind="todo.title"></label>
+                            <!-- CALENDAR -->
                             <div id="ce-date-calendar">
+                                <!-- MONTH -->
                                 <div class="ce-date-month">
                                     <span ng-bind="todo.creationDate.month"></span></div>
+                                <!-- DAY -->
                                 <div class="ce-date-day">
                                     <span ng-bind="todo.creationDate.day"></span></div>
                             </div>
