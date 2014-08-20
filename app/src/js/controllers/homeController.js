@@ -38,7 +38,7 @@ angular.module("FastToDo").controller("HomeController", [
         };
 
         $scope.openAdd = function openAdd() {
-            $rootScope.isAddMode = !$rootScope.isAddMode;
+            $scope.goTo('/todo');
         };
 
         $scope.openDelete = function openDelete() {
