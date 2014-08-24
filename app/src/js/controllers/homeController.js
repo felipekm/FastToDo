@@ -1,12 +1,14 @@
 /*global angular, console, confirm, $*/
 
 angular.module("FastToDo").controller("HomeController", [
-    "$scope", "$http", "$rootScope", 'todoService', function HomeController($scope, $http, $rootScope, todoService) {
+    "$scope", "$http", "$rootScope", 'todoService', "$timeout",
+    function HomeController($scope, $http, $rootScope, todoService, $timeout) {
 
         'use strict';
 
         $scope.modelTodo = {};
         $scope.todoList = {};
+        $scope.isLoading = true;
 
         $scope.about = function about() {
             $scope.goTo('/about');
@@ -48,11 +50,16 @@ angular.module("FastToDo").controller("HomeController", [
         };
 
         $scope.makeItDone = function makeItDone(todo) {
-            //todoService.makeItDone(todo);
-            todoService.remove(todo.id);
+            $scope.isLoading = true;
+            todoService.remove(todo.id).then(
+                function success(todoList) {
+                    $scope.todoList = todoList;
+                    $scope.isLoading = false;
+                }
+            );
         };
 
-        $rootScope.$on('ToDoItemSaved', function(event, newTodoList) {
+        $rootScope.$on('ToDoItemSaved', function (event, newTodoList) {
             $scope.todoList = newTodoList;
         });
 
@@ -62,6 +69,7 @@ angular.module("FastToDo").controller("HomeController", [
 
         function init() {
             $scope.todoList = todoService.getAll() || [];
+            $scope.isLoading = false;
         }
 
         init();

@@ -6,7 +6,6 @@ angular.module("FastToDo").service("todoService", ["$rootScope", "$q", function 
     var toDoList,
         toDo,
         self = this,
-        defer,
         i;
 
     function getCreationDate() {
@@ -33,6 +32,8 @@ angular.module("FastToDo").service("todoService", ["$rootScope", "$q", function 
     }
 
     this.save = function save(toDoItem) {
+        var savePromise = $q.defer();
+        
         var i = 0;
         toDoList = self.getAll() || [];
 
@@ -55,10 +56,15 @@ angular.module("FastToDo").service("todoService", ["$rootScope", "$q", function 
         this.toDo = {};
 
         $rootScope.storage.put('ToDoItems', JSON.stringify(toDoList));
-        $rootScope.$broadcast('ToDoItemSaved', toDoList);
+        //$rootScope.$broadcast('ToDoItemSaved', toDoList);
+        
+        savePromise.resolve(toDoList);
+        
+        return savePromise.promise;
     };
 
     this.remove = function remove(todoId) {
+        var removePromise = $q.defer();
         toDoList = self.getAll() || [];
 
         if (toDoList.length > 0) {
@@ -69,8 +75,11 @@ angular.module("FastToDo").service("todoService", ["$rootScope", "$q", function 
             }
 
             $rootScope.storage.put('ToDoItems', JSON.stringify(toDoList));
-            $rootScope.$broadcast('ToDoItemSaved', toDoList);
         }
+        
+        removePromise.resolve(toDoList);
+        
+        return removePromise.promise;
     };
 
     this.getAll = function getAll() {

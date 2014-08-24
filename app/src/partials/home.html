@@ -29,14 +29,15 @@
 
         </div>
 
-        <div id="divToDo">
+        <div loader="isLoading"></div>
+        <div id="divToDo" ng-hide="isLoading">
             <h3 class="topcoat-list__header">Items Count
                 <span class="topcoat-notification">{{ itemsToBeDone() || 0 }}</span>
             </h3>
             <div class="topcoat-list__container scroller" ng-hide="isAddMode()">
 
                 <!-- TODO LIST -->
-                <ul class="topcoat-list__container ">
+                <ul class="topcoat-list__container">
                     <li ng-repeat="todo in todoList track by todo.id | orderBy: 'todo.id'" >
 
                         <!-- TODO ITEM -->

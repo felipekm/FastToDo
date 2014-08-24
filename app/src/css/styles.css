@@ -10,7 +10,7 @@
 }
 
 button::-moz-focus-inner {
-  border: 0;
+    border: 0;
 }
 
 .cssFade {
@@ -49,7 +49,7 @@ textarea {
 #divToDo {
     max-height: max-content;
 }
- 
+
 .list {
     position: absolute;
     top: 4.35rem;
@@ -176,10 +176,3 @@ textarea {
 .cssFade.ng-hide {
     opacity: 0;
 }
-
--webkit-touch-callout: none;
--webkit-user-select: none;
--khtml-user-select: none;
--moz-user-select: none;
--ms-user-select: none;
-user-select: none;

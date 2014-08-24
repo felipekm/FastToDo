@@ -1,12 +1,13 @@
 /*globals angular, console, $ */
 
 angular.module("FastToDo").controller("ToDoController", [
-    "$scope", "$rootScope", "todoService",
-    function ToDoController($scope, $rootScope, todoService) {
+    "$scope", "$rootScope", "todoService", "$timeout",
+    function ToDoController($scope, $rootScope, todoService, $timeout) {
         'use strict';
 
         $scope.toDo = {};
         $scope.toDoList = [];
+        $scope.isLoading = false;
 
         $scope.isTitleRemainingVisible = true;
         $scope.isDescriptionRemainingVisible = false;
@@ -20,9 +21,18 @@ angular.module("FastToDo").controller("ToDoController", [
         };
 
         $scope.save = function save() {
-            todoService.save($scope.toDo);
-            $scope.toDo = {};
-            $rootScope.goTo('/home');
+            $scope.isLoading = true;
+
+            todoService.save($scope.toDo).then(
+                function success(todoList) {
+                    $scope.toDoList = todoList;
+                    $scope.toDo = {};
+                    $rootScope.goTo('/home');
+
+                }
+            );
+
+            $scope.isLoading = false;
         };
 
         $scope.cancel = function cancel() {
@@ -32,6 +42,7 @@ angular.module("FastToDo").controller("ToDoController", [
 
         function init() {
             $scope.toDo = todoService.getItem();
+            $scope.isLoading = false;
             $('#txtToDoTitle').trigger('focus');
         }
 
