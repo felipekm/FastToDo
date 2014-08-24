@@ -3,25 +3,12 @@
 angular.module("FastToDo").controller("ToDoController", [
     "$scope", "$rootScope", "todoService",
     function ToDoController($scope, $rootScope, todoService) {
-
         'use strict';
 
-        $rootScope.headerTitle = "New Item";
+        $scope.toDo = {};
+        $scope.toDoList = [];
 
-        $scope.toDo = {
-            id: 0,
-            description : null,
-            isDone: false,
-            creationDate : {
-                day : null,
-                month : null,
-                year : null
-            }
-        };
-
-        $scope.toDoList = [{}];
-
-        $scope.isTitleRemainingVisible = false;
+        $scope.isTitleRemainingVisible = true;
         $scope.isDescriptionRemainingVisible = false;
 
         $scope.showRemaining = function showRemaining(type) {
@@ -32,29 +19,20 @@ angular.module("FastToDo").controller("ToDoController", [
             }
         };
 
-        $scope.save = function save() {            
-            todoService.save($scope.toDo);       
+        $scope.save = function save() {
+            todoService.save($scope.toDo);
+            $scope.toDo = {};
             $rootScope.goTo('/home');
         };
 
         $scope.cancel = function cancel() {
-            $scope.toDo = {
-                id: 0,
-                description : null,
-                isDone: false,
-                creationDate : {
-                    day : null,
-                    month : null,
-                    year : null
-                }
-            };
-
+            todoService.clearItem();
             $rootScope.goTo('/home');
         };
 
         function init() {
             $scope.toDo = todoService.getItem();
-            $('#txtToDoTitle').focus();
+            $('#txtToDoTitle').trigger('focus');
         }
 
         init();

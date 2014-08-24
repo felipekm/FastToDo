@@ -6,6 +6,11 @@
     -ms-user-select: none;
     user-select: none;
     cursor: pointer;
+    background-color: #4b4d4e
+}
+
+button::-moz-focus-inner {
+  border: 0;
 }
 
 .cssFade {
@@ -150,6 +155,7 @@ textarea {
     line-height: 1em;
 }
 
+/* Chars Remaining */
 .chars-remaining {
     font-family: "trebuchet ms";
     float: right;
@@ -169,3 +175,11 @@ textarea {
 }
 .cssFade.ng-hide {
     opacity: 0;
+}
+
+-webkit-touch-callout: none;
+-webkit-user-select: none;
+-khtml-user-select: none;
+-moz-user-select: none;
+-ms-user-select: none;
+user-select: none;

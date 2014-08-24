@@ -3,70 +3,71 @@
 
     <div class="page page-center">
 
+        <!-- NAVIGATION BAR -->
         <div class="topcoat-navigation-bar">
 
+            <!-- NEW BUTTON -->
             <div id="newTodo" class="topcoat-navigation-bar__item left quarter cssFade" 
                  ng-hide="isAddMode()" 
-                 ng-click="openAdd()">
+                 ng-click="addNewItem()">
                 <button class="topcoat-icon-button--quiet" />
                 <span class="topcoat-icon icomatic">plus</span>
             </div>
 
-            <div id="saveTodo" class="topcoat-navigation-bar__item left quarter cssFade" 
-                 ng-show="isAddMode()" 
-                 ng-click="saveNewItem()">
-                <button class="topcoat-icon-button--quiet" />
-                <span class="topcoat-icon icomatic">checkmark</span>            
+            <!-- TITLE -->
+            <div class="topcoat-navigation-bar__item center half"
+                 ng-click="about()"> Fast ToDo
             </div>
 
-            <div class="topcoat-navigation-bar__item center half" 
-                 ng-click="about()">{{headerTitle}}</h1>
+            <!-- DELETE ALL BUTTON -->
+            <div id="deleteAllTodo" class="topcoat-navigation-bar__item right quarter cssFade"
+                 ng-click="removeAll()"
+                 ng-hide="itemsToBeDone() === 0">
+                <button class="topcoat-icon-button--quiet" />
+                <span class="topcoat-icon icomatic">delete</span>
+            </div>
+
         </div>
 
-        <div id="cancelTodo" class="topcoat-navigation-bar__item right quarter cssFade" 
-             ng-show="isAddMode()" 
-             ng-click="cancelItem()">
-            <button class="topcoat-icon-button--quiet" />
-            <span class="topcoat-icon icomatic">cancel</span>
-        </div>
+        <div id="divToDo">
+            <h3 class="topcoat-list__header">Items Count
+                <span class="topcoat-notification">{{ itemsToBeDone() || 0 }}</span>
+            </h3>
+            <div class="topcoat-list__container scroller" ng-hide="isAddMode()">
 
-        <div id="deleteAllTodo" class="topcoat-navigation-bar__item right quarter cssFade" 
-             ng-click="deleteAll()"
-             ng-hide="isAllDone()">
-            <button class="topcoat-icon-button--quiet" />
-            <span class="topcoat-icon icomatic">delete</span>
+                <!-- TODO LIST -->
+                <ul class="topcoat-list__container ">
+                    <li ng-repeat="todo in todoList track by todo.id | orderBy: 'todo.id'" >
+
+                        <!-- TODO ITEM -->
+                        <div id="todoItem">
+                            <div class="doneToDoItem unselectable" ng-click="makeItDone(todo)">Done</div>
+
+                            <!-- BUTTON TODO UNDER SWIPE -->
+                            <div id="todoItem_{{todo.id}}" class="topcoat-list__item row between middle toDoItem unselectable"
+                                 ng-click="getDetails(todo)"
+                                 ng-swipe-left="swipeItemToLeft(todo.id)"
+                                 ng-swipe-right="swipeItemToRight(todo.id)">
+                                <!-- TITLE -->
+                                <label class="unselectable" ng-bind="todo.title"></label>
+                                <!-- CALENDAR -->
+                                <div class="unselectable" id="ce-date-calendar">
+                                    <!-- MONTH -->
+                                    <div class="ce-date-month unselectable">
+                                        <span ng-bind="todo.creationDate.month"></span>
+                                    </div>
+                                    <!-- DAY -->
+                                    <div class="ce-date-day unselectable">
+                                        <span ng-bind="todo.creationDate.day"></span>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+
+                    </li>
+                </ul>
+            </div>
         </div>
     </div>
-
-    <div id="divToDo" ng-show="!isAddMode()">
-        <h3 class="topcoat-list__header">Items Count
-            <span class="topcoat-notification">{{ itemsToBeDone() }}</span>
-        </h3>
-        <div class="topcoat-list__container scroller" ng-hide="isAddMode()">
-            <ul class="topcoat-list__container ">
-                <li ng-repeat="todo in todoList track by todo.id" >
-                    <!-- TODO -->
-                    <div id="todoItem" ng-hide="todo.isDone">
-                        <div class="doneToDoItem" ng-click="doneItem(todo)">Done</div>
-                        <!-- BUTTON TODO UNDER SWIPE -->
-                        <div id="todoItem_{{todo.id}}" class="topcoat-list__item row between middle toDoItem unselectable"
-                             ng-swipe-left="swipeItemToLeft(todo.id)" ng-click="details(todo)"
-                             ng-swipe-right="swipeItemToRight(todo.id)">
-                            <!-- TITLE -->
-                            <label ng-bind="todo.title"></label>
-                            <!-- CALENDAR -->
-                            <div id="ce-date-calendar">
-                                <!-- MONTH -->
-                                <div class="ce-date-month">
-                                    <span ng-bind="todo.creationDate.month"></span></div>
-                                <!-- DAY -->
-                                <div class="ce-date-day">
-                                    <span ng-bind="todo.creationDate.day"></span></div>
-                            </div>
-                        </div>
-                    </div>
-                </li>
-            </ul>
-        </div>
-    </div>   
 </div>
