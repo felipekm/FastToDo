@@ -21,8 +21,7 @@
         $routeProvider.when("/about", { templateUrl: "partials/templates/about.html", controller: "AboutController"});
         $routeProvider.when("/todo", { templateUrl: "partials/templates/todo.html", controller: "ToDoController"});
         
-        $routeProvider.otherwise({ redirectTo: "/home" });        
-        
+        $routeProvider.otherwise({ redirectTo: "/home" });
     }]);
 
 

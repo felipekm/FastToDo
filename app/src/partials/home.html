@@ -3,72 +3,72 @@
 
     <div class="page page-center">
 
+        <!-- NAVIGATION BAR -->
         <div class="topcoat-navigation-bar">
-            
-            <div id="newTodo" class="topcoat-navigation-bar__item left quarter" data-ng-hide="isAddMode()" data-ng-click="openAdd()">
+
+            <!-- NEW BUTTON -->
+            <div id="newTodo" class="topcoat-navigation-bar__item left quarter cssFade" 
+                 ng-hide="isAddMode()" 
+                 ng-click="addNewItem()">
                 <button class="topcoat-icon-button--quiet" />
                 <span class="topcoat-icon icomatic">plus</span>
             </div>
 
-            <div id="saveTodo" class="topcoat-navigation-bar__item left quarter" data-ng-show="isAddMode()" data-ng-click="saveNewItem()">
-                <button class="topcoat-icon-button--quiet" />
-                <span class="topcoat-icon icomatic">checkmark</span>            
+            <!-- TITLE -->
+            <div class="topcoat-navigation-bar__item center half"
+                 ng-click="about()"> Fast ToDo
             </div>
 
-            <div class="topcoat-navigation-bar__item center half" ng-click="about()">{{headerTitle}}</h1>
+            <!-- DELETE ALL BUTTON -->
+            <div id="deleteAllTodo" class="topcoat-navigation-bar__item right quarter cssFade"
+                 ng-click="removeAll()"
+                 ng-hide="itemsToBeDone() === 0">
+                <button class="topcoat-icon-button--quiet" />
+                <span class="topcoat-icon icomatic">delete</span>
+            </div>
+
         </div>
 
-        <div id="cancelTodo" class="topcoat-navigation-bar__item right quarter" 
-             data-ng-show="isAddMode()" data-ng-click="cancelItem()">
-            <button class="topcoat-icon-button--quiet" />
-            <span class="topcoat-icon icomatic">cancel</span>
-        </div>
+        <div loader="isLoading"></div>
+        <div id="divToDo" ng-hide="isLoading">
+            <h3 class="topcoat-list__header">Items Count
+                <span class="topcoat-notification">{{ itemsToBeDone() || 0 }}</span>
+            </h3>
+            <div class="topcoat-list__container scroller" ng-hide="isAddMode()">
 
-        <div id="deleteAllTodo" class="topcoat-navigation-bar__item right quarter" ng-click="deleteAll()"
-             data-ng-hide="todoList.length === 0">
-            <button class="topcoat-icon-button--quiet" />
-            <span class="topcoat-icon icomatic">delete</span>
-        </div>
-    </div> 
-    
-    <div class="todo-form" ng-show="isAddMode()">
-        <div id="divToDoTitle">
-            <input id="txtToDoTitle" focusme type="text" placeholder="Title" class="topcoat-text-input" maxlength="20" 
-                ng-focus="showRemaining('title')" ng-blur="showRemaining('title')"
-                ng-model="modelTodo.title"/>
-            <p><small ng-show="isTitleRemainingVisible" class="chars-remaining">{{ -(modelTodo.title.length - 20) }} chars remaining..</small></p>
-        </div>
-        <div id="divToDo">
-            <p><small class="chars-remaining" ng-show="isDescriptionRemainingVisible">{{ -(modelTodo.description.length - 200) }} chars remaining..</small></p>
-            <textarea id="txtToDoDescription" class="topcoat-text-input" maxlength="200" type="text" rows="7" placeholder="Description" 
-                ng-model="modelTodo.description" ng-focus="showRemaining('description')" ng-blur="showRemaining('description')"></textarea>
-        </div>
-        </br>       
-    </div>
+                <!-- TODO LIST -->
+                <ul class="topcoat-list__container">
+                    <li ng-repeat="todo in todoList track by todo.id | orderBy: 'todo.id'" >
 
-    <div id="divToDo" ng-show="!isAddMode()">
-        <h3 class="topcoat-list__header">Items Count
-            <span class="topcoat-notification">{{ itemsToBeDone() }}</span>
-        </h3>
-        <div class="topcoat-list__container scroller" ng-hide="isAddMode()">
-            
-            <ul class="topcoat-list__container ">
-                <li ng-repeat="todo in todoList track by todo.id" >
-                    <div id="todoItem" ng-hide="todo.isDone">
-                        <div class="doneToDoItem" ng-click="doneItem(todo)">Done</div>
-                        <div id="todoItem_{{todo.id}}" ng-click="details(todo)"  class="topcoat-list__item row between middle toDoItem unselectable" 
-                             ng-swipe-right="swipeItemToRight(todo.id)" ng-swipe-left="swipeItemToLeft(todo.id)">
-                            <label ng-bind="todo.title"></label>
-                            <div id="ce-date-calendar">
-                                <div class="ce-date-month">
-                                    <span ng-bind="todo.creationDate.month"></span></div>
-                                <div class="ce-date-day">
-                                    <span ng-bind="todo.creationDate.day"></span></div>
+                        <!-- TODO ITEM -->
+                        <div id="todoItem">
+                            <div class="doneToDoItem unselectable" ng-click="makeItDone(todo)">Done</div>
+
+                            <!-- BUTTON TODO UNDER SWIPE -->
+                            <div id="todoItem_{{todo.id}}" class="topcoat-list__item row between middle toDoItem unselectable"
+                                 ng-click="getDetails(todo)"
+                                 ng-swipe-left="swipeItemToLeft(todo.id)"
+                                 ng-swipe-right="swipeItemToRight(todo.id)">
+                                <!-- TITLE -->
+                                <label class="unselectable" ng-bind="todo.title"></label>
+                                <!-- CALENDAR -->
+                                <div class="unselectable" id="ce-date-calendar">
+                                    <!-- MONTH -->
+                                    <div class="ce-date-month unselectable">
+                                        <span ng-bind="todo.creationDate.month"></span>
+                                    </div>
+                                    <!-- DAY -->
+                                    <div class="ce-date-day unselectable">
+                                        <span ng-bind="todo.creationDate.day"></span>
+                                    </div>
+                                </div>
                             </div>
+
                         </div>
-                    </div>
-                </li>
-            </ul>
+
+                    </li>
+                </ul>
+            </div>
         </div>
-    </div>   
+    </div>
 </div>

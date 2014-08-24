@@ -6,6 +6,11 @@
     -ms-user-select: none;
     user-select: none;
     cursor: pointer;
+    background-color: #4b4d4e
+}
+
+button::-moz-focus-inner {
+    border: 0;
 }
 
 .cssFade {
@@ -44,7 +49,7 @@ textarea {
 #divToDo {
     max-height: max-content;
 }
- 
+
 .list {
     position: absolute;
     top: 4.35rem;
@@ -150,10 +155,24 @@ textarea {
     line-height: 1em;
 }
 
+/* Chars Remaining */
 .chars-remaining {
     font-family: "trebuchet ms";
     float: right;
     font-size: 8pt;
     margin-top: -3%;
     color: #e5e9e8;
+}
+
+.ng-hide-add, .ng-hide-remove {
+    /* ensure visibility during the transition */
+    display: block !important; /* yes, important */
+}
+
+.cssFade {
+    transition: 0.3s linear all;
+    opacity: 1;
+}
+.cssFade.ng-hide {
+    opacity: 0;
 }

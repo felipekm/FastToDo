@@ -1,27 +1,15 @@
 /*globals angular, console, $ */
 
 angular.module("FastToDo").controller("ToDoController", [
-    "$scope", "$rootScope", "todoService",
-    function ToDoController($scope, $rootScope, todoService) {
-
+    "$scope", "$rootScope", "todoService", "$timeout",
+    function ToDoController($scope, $rootScope, todoService, $timeout) {
         'use strict';
 
-        $rootScope.headerTitle = "New Item";
+        $scope.toDo = {};
+        $scope.toDoList = [];
+        $scope.isLoading = false;
 
-        $scope.toDo = {
-            id: 0,
-            description : null,
-            isDone: false,
-            creationDate : {
-                day : null,
-                month : null,
-                year : null
-            }
-        };
-
-        $scope.toDoList = [{}];
-
-        $scope.isTitleRemainingVisible = false;
+        $scope.isTitleRemainingVisible = true;
         $scope.isDescriptionRemainingVisible = false;
 
         $scope.showRemaining = function showRemaining(type) {
@@ -32,29 +20,30 @@ angular.module("FastToDo").controller("ToDoController", [
             }
         };
 
-        $scope.save = function save() {            
-            todoService.save($scope.toDo);       
-            $rootScope.goTo('/home');
+        $scope.save = function save() {
+            $scope.isLoading = true;
+
+            todoService.save($scope.toDo).then(
+                function success(todoList) {
+                    $scope.toDoList = todoList;
+                    $scope.toDo = {};
+                    $rootScope.goTo('/home');
+
+                }
+            );
+
+            $scope.isLoading = false;
         };
 
         $scope.cancel = function cancel() {
-            $scope.toDo = {
-                id: 0,
-                description : null,
-                isDone: false,
-                creationDate : {
-                    day : null,
-                    month : null,
-                    year : null
-                }
-            };
-
+            todoService.clearItem();
             $rootScope.goTo('/home');
         };
 
         function init() {
             $scope.toDo = todoService.getItem();
-            $('#txtToDoTitle').focus();
+            $scope.isLoading = false;
+            $('#txtToDoTitle').trigger('focus');
         }
 
         init();

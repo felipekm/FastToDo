@@ -3,84 +3,101 @@
 angular.module("FastToDo").service("todoService", ["$rootScope", "$q", function todoService($rootScope, $q) {
     'use strict';
 
-    var toDo = {},
+    var toDoList,
+        toDo,
         self = this,
-        defer,
         i;
 
-    this.saveList = function saveList(todo) {
-        defer = $q.defer();
+    function getCreationDate() {
+        var today,
+            month,
+            todoItem,
+            options,
+            creationDate = {};
 
-        $rootScope.storage.put('toDoList', JSON.stringify(todo));
-        defer.resolve(self.getAll());
+        today = new Date();
 
-        return defer.promise;
-    };
+        options = {
+            month: "long"
+        };
 
-    this.add = function add(todo) {
-        var toDoList = self.getAll();
-        toDoList.push(todo);
-        self.save(toDoList).then(
-            function success(data) {
-                return data;
-            },
-            function error(reason) {
-                console.log('[ERROR] - ' + reason);
-                return reason;
-            }
-        );
-    };
-    
-    this.save = function save(todo) {
-        if (todo.id > 0) {
-            var todoList = self.getAll(),
-                i;
-            for (i = 0; i < todoList.length; i += 1) {
-                if (todoList[i].id === todo.id) {
-                    todoList[i] = todo;
-                    self.saveList(todoList);
+        month = today.toLocaleString("en-US", options).toUpperCase();
+
+        creationDate = {
+            day : today.getDate(),
+            month : month.slice(0, 3)
+        };
+
+        return creationDate;
+    }
+
+    this.save = function save(toDoItem) {
+        var savePromise = $q.defer();
+        
+        var i = 0;
+        toDoList = self.getAll() || [];
+
+        if (!toDoItem.id) {
+            toDoItem.id = toDoList.length + 1;
+            toDoItem.creationDate = getCreationDate();
+
+            toDoList.push(toDoItem);
+        } else {
+
+            if (toDoList.length > 0) {
+                for (i; i < toDoList.length; i += 1) {
+                    if (toDoList[i].id === toDoItem.id) {
+                        toDoList[i] = toDoItem;
+                    }
                 }
             }
         }
+
+        this.toDo = {};
+
+        $rootScope.storage.put('ToDoItems', JSON.stringify(toDoList));
+        //$rootScope.$broadcast('ToDoItemSaved', toDoList);
+        
+        savePromise.resolve(toDoList);
+        
+        return savePromise.promise;
     };
 
     this.remove = function remove(todoId) {
-        defer = $q.defer();
+        var removePromise = $q.defer();
+        toDoList = self.getAll() || [];
 
-        self.toDo = self.getAll();
-
-        for (i = 0; i < self.toDo.length; i += 1) {
-            if (self.toDo[i].id === todoId) {
-                self.toDo.splice(i, 1);
+        if (toDoList.length > 0) {
+            for (i = 0; i < toDoList.length; i += 1) {
+                if (toDoList[i].id === todoId) {
+                    toDoList.splice(i, 1);
+                }
             }
+
+            $rootScope.storage.put('ToDoItems', JSON.stringify(toDoList));
         }
-
-        self.save(self.toDo);
-
-        return defer.promise;
+        
+        removePromise.resolve(toDoList);
+        
+        return removePromise.promise;
     };
 
     this.getAll = function getAll() {
-        var data = $rootScope.storage.get('toDoList');
-        if (data) {
-            self.toDo = JSON.parse(data);
-        } else {
-            self.toDo = [];
+        toDoList = $rootScope.storage.get('ToDoItems') || [];
+
+        if (toDoList.length > 0) {
+            toDoList = JSON.parse(toDoList);
         }
 
-        return self.toDo;
+        return toDoList;
     };
 
-    this.clear = function clear() {
-        defer = $q.defer();
-
-        $rootScope.storage.clear('toDoList');
-        defer.resolve(self.getAll());
-
-        return defer.promise;
+    this.removeAll = function removeAll() {
+        $rootScope.storage.clear('ToDoItems');
+        $rootScope.$broadcast('ToDoItemSaved', toDoList);
     };
 
-    this.done = function done(todo) {
+    this.makeItDone = function makeItDone(todo) {
         self.toDo = todo;
         self.toDo.isDone = true;
         self.save(self.toDo);
@@ -92,6 +109,11 @@ angular.module("FastToDo").service("todoService", ["$rootScope", "$q", function 
 
     this.getItem = function getItem() {
         return this.toDo;
+    };
+
+    this.clearItem = function clearItem() {
+        this.toDo = {};
+
     };
 
 }]);
