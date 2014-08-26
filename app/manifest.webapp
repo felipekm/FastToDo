@@ -4,11 +4,16 @@
     "launch_path": "/src/index.html",
     "description": "A very fast way to organize daily tasks",
     "icons": {
-        "16": "/images/fasttodo_16.png",
-        "32": "/images/fasttodo_32.png",
-        "64": "/images/fasttodo_64.png",
-        "96": "/images/fasttodo_96.png",
-        "128": "/images/fasttodo_128.png"
+        "60": "/images/fasttodo_60.png",
+        "84": "/images/fasttodo_84.png",
+        "90": "/images/fasttodo_90.png",
+        "126": "/images/fasttodo_126.png",
+        "128": "/images/fasttodo_128.png",
+        "142": "/images/fasttodo_142.png",
+        "189": "/images/fasttodo_189.png",
+        "256": "/images/fasttodo_256.png",
+        "289": "/images/fasttodo_289.png",
+        "512": "/images/fasttodo_512.png",
     },
     "developer": {
         "name": "Felipe Kautzmann",
