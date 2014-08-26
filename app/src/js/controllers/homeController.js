@@ -1,164 +1,77 @@
-/*global angular, console, confirm*/
+/*global angular, console, confirm, $*/
 
-angular.module("FastToDo").controller("homeController", ["$scope", "$http", "$rootScope", 'todoService', function ($scope, $http, $rootScope, todoService) {
-    'use strict';
+angular.module("FastToDo").controller("HomeController", [
+    "$scope", "$http", "$rootScope", 'todoService', "$timeout",
+    function HomeController($scope, $http, $rootScope, todoService, $timeout) {
 
-    $scope.modelTodo = {
-        id: 0,
-        description : null,
-        creationDate : {
-            day : null,
-            month : null
-        },
-        isDone: false
-    }
+        'use strict';
 
-    $scope.isAddMode = function isAddMode() {
-        return $rootScope.isAddMode;
-    };
-    
-    $scope.about = function about() {
-        $scope.goTo('/about');
-    };
-    
-    $scope.details = function details() {
-        $scope.goTo('/details');
-    }
+        $scope.modelTodo = {};
+        $scope.todoList = {};
+        $scope.isLoading = true;
 
-    $scope.isDeleteMode = function isDeleteMode() {
-        return $rootScope.isDeleteMode;
-    };
+        $scope.about = function about() {
+            $scope.goTo('/about');
+        };
 
-    $scope.openAdd = function openAdd() {
-        $rootScope.isAddMode = true;
-    };
+        $scope.getDetails = function getDetails(todo) {
+            todoService.setItem(todo);
+            $scope.goTo('/todo');
+        };
 
-    $scope.openDelete = function openDelete() {
-        $rootScope.isDeleteMode = true;
-    };
+        $scope.addNewItem = function addNewItem() {
+            $scope.goTo('/todo');
+        };
 
-    $scope.itemsToBeDone = function itemsToBeDone () {
-        var count = 0;
-        for(var i in $scope.todoList) {            
-            if ($scope.todoList[i].isDone === false) {
-                count += 1;
+        $scope.itemsToBeDone = function itemsToBeDone() {
+            var count = 0, i;
+            return $scope.todoList.length;
+        };
+
+        $scope.swipeItemToRight = function swipeItemToRight(todoId) {
+            $('#todoItem_' + todoId).animate({
+                right: '0px',
+                left : '90px'
+            }, 200);
+        };
+
+        $scope.swipeItemToLeft = function swipeItemToLeft(todoId) {
+            $('#todoItem_' + todoId).animate({
+                right: '90px',
+                left : '0px'
+            }, 200);
+        };
+
+        $scope.removeAll = function removeAll() {
+            if (confirm('Are you sure to Delete All Items?')) {
+                todoService.removeAll();
+                $scope.todoList = {};
             }
-        }
-        return count;
-    }
+        };
 
-    $scope.swipeItemToRight = function swipeItemToRight(todoId) {
-        $('#todoItem_' + todoId).animate({
-            right: '0px',
-            left : '90px'
-        }, 200).addClass('opened');
-    };
-
-    $scope.swipeItemToLeft = function swipeItemToLeft(todoId) {        
-        $('#todoItem_' + todoId).animate({
-            right: '90px',
-            left : '0px'
-        }, 200).removeClass('opened');
-    };
-
-    $scope.saveNewItem = function saveNewItem(action) {
-        $rootScope.isAddMode = false;
-
-        if (action === 'cancel') {
-            $scope.modelTodo = {};
-            return;
-        }
-
-        if ($scope.modelTodo.description) {
-            $scope.modelTodo.id = $scope.todoList.length === 0 ? 1 : $scope.todoList.length + 1;
-            $scope.modelTodo.isDone = false;
-
-            var today = new Date(),
-                options = {
-                    month: "long"
-                },
-                month = today.toLocaleString("en-US", options).toUpperCase();
-
-            $scope.modelTodo.creationDate = {
-                day : today.getDate(),
-                month : month.slice(0, 3)
-            };
-
-            if ($scope.modelTodo.id !== 0) {
-                $scope.todoList.push($scope.modelTodo);
-                todoService.save($scope.todoList).then(
-                    function(data) {
-                        $scope.todoList = data;
-                    },
-                    function (reason) {
-                        console.log('[ERROR] - ' + reason);
-                        $scope.todoList = todoService.getAll();
-                    }
-                );
-
-                $scope.modelTodo = {
-                    id: 0,
-                    description : null,
-                    isDone: false
-                }
-            }        
-        }
-    };
-
-    $scope.removeItem = function removeItem(todoId) {
-        todoService.remove(todoId).then(
-            function(data) {
-                $scope.todoList = data || []
-            },
-            function(reason) {
-                console.log('[ERROR] - ' + reason);
-                $scope.todoList = todoService.getAll();
-            }
-        );
-    };
-
-    $scope.deleteAll = function deleteAll() {
-        if (confirm('Are you sure to Delete All Items?')) {
-            todoService.clear().then(
-                function(data) {
-                    $scope.todoList = data;
-                },
-                function() {
-                    console.log('[ERROR] - ' + reason);
-                    $scope.todoList = todoService.getAll();
+        $scope.makeItDone = function makeItDone(todo) {
+            $scope.isLoading = true;
+            todoService.remove(todo.id).then(
+                function success(todoList) {
+                    $scope.todoList = todoList;
+                    $scope.isLoading = false;
                 }
             );
-        }
-    }
+        };
 
-    $scope.doneItem = function doneItem(todoId) {
-        todoService.done(todoId);
-        $scope.todoList = todoService.getAll() || [];
-    };
-
-    $scope.closeDelete = function closeDelete() {
-        if (confirm('Are you sure?'), function () {
-            todoService.clear();
+        $rootScope.$on('ToDoItemSaved', function (event, newTodoList) {
+            $scope.todoList = newTodoList;
         });
 
-        $scope.todoList = [];
+        // disabling animate
+        $scope.disableHeaderBack();
+        $scope.disableAnimate();
 
-        $rootScope.isDeleteMode = false;
-    };
+        function init() {
+            $scope.todoList = todoService.getAll() || [];
+            $scope.isLoading = false;
+        }
 
-    $scope.cancel = function cancel() {
-        $rootScope.isAddMode = false;
-        $scope.modelTodo = {};
-    };
+        init();
 
-    // disabling animate
-    $scope.disableHeaderBack();
-    $scope.disableAnimate();
-
-    function init() {
-        $scope.todoList = todoService.getAll() || [];
-    }
-
-    init();
-
-}]);
+    }]);

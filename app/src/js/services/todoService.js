@@ -3,66 +3,117 @@
 angular.module("FastToDo").service("todoService", ["$rootScope", "$q", function todoService($rootScope, $q) {
     'use strict';
 
-    var toDo = [],
+    var toDoList,
+        toDo,
         self = this,
-        defer;    
-    
-    this.save = function save(todo) {
-        defer = $q.defer();
-        
-        $rootScope.storage.put('toDoList', JSON.stringify(todo));
-        defer.resolve(self.getAll());
-        
-        return defer.promise;
-    };
+        i;
 
-    this.getAll = function getAll() {
-        var data = $rootScope.storage.get('toDoList');
-        if (data) {
-            self.toDo = JSON.parse(data);
+    function getCreationDate() {
+        var today,
+            month,
+            todoItem,
+            options,
+            creationDate = {};
+
+        today = new Date();
+
+        options = {
+            month: "long"
+        };
+
+        month = today.toLocaleString("en-US", options).toUpperCase();
+
+        creationDate = {
+            day : today.getDate(),
+            month : month.slice(0, 3)
+        };
+
+        return creationDate;
+    }
+
+    this.save = function save(toDoItem) {
+        var savePromise = $q.defer(),
+            i = 0;
+        
+        toDoList = self.getAll() || [];
+
+        if (!toDoItem.id) {
+            toDoItem.id = toDoList.length + 1;
+            toDoItem.creationDate = getCreationDate();
+
+            toDoList.push(toDoItem);
         } else {
-            self.toDo = [];
+
+            if (toDoList.length > 0) {
+                for (i; i < toDoList.length; i += 1) {
+                    if (toDoList[i].id === toDoItem.id) {
+                        toDoList[i] = toDoItem;
+                    }
+                }
+            }
         }
 
-        return self.toDo;
-    };
+        this.toDo = {};
 
-    this.clear = function clear() {
-        defer = $q.defer();
+        $rootScope.storage.put('ToDoItems', JSON.stringify(toDoList));
+        //$rootScope.$broadcast('ToDoItemSaved', toDoList);
         
-        $rootScope.storage.clear('toDoList');
-        defer.resolve(self.getAll());
+        savePromise.resolve(toDoList);
         
-        return defer.promise;
+        return savePromise.promise;
     };
 
     this.remove = function remove(todoId) {
-        defer = $q.defer();
-        
-        self.toDo = self.getAll();
+        var removePromise = $q.defer();
+        toDoList = self.getAll() || [];
 
-        for (var i=0; i < self.toDo.length; i+=1) {
-            if (self.toDo[i].id === todoId) {
-                self.toDo.splice(i, 1);
+        if (toDoList.length > 0) {
+            for (i = 0; i < toDoList.length; i += 1) {
+                if (toDoList[i].id === todoId) {
+                    toDoList.splice(i, 1);
+                }
             }
-        }
 
-        self.save(self.toDo);
+            $rootScope.storage.put('ToDoItems', JSON.stringify(toDoList));
+        }
         
-        return defer.promise;
+        removePromise.resolve(toDoList);
+        
+        return removePromise.promise;
     };
 
-    this.done = function done(todoId) {
-        self.toDo = self.getAll();
+    this.getAll = function getAll() {
+        toDoList = $rootScope.storage.get('ToDoItems') || [];
 
-        for (var i=0; i < self.toDo.length; i+=1) {
-            if (self.toDo[i].id === todoId) {
-                //self.toDo[i].isDone = true;
-                self.toDo.splice(i, 1);
-            }
+        if (toDoList.length > 0) {
+            toDoList = JSON.parse(toDoList);
         }
 
+        return toDoList;
+    };
+
+    this.removeAll = function removeAll() {
+        $rootScope.storage.clear('ToDoItems');
+        $rootScope.$broadcast('ToDoItemSaved', toDoList);
+    };
+
+    this.makeItDone = function makeItDone(todo) {
+        self.toDo = todo;
+        self.toDo.isDone = true;
         self.save(self.toDo);
+    };
+
+    this.setItem = function setItem(item) {
+        this.toDo = item;
+    };
+
+    this.getItem = function getItem() {
+        return this.toDo;
+    };
+
+    this.clearItem = function clearItem() {
+        this.toDo = {};
+
     };
 
 }]);

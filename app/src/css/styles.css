@@ -5,13 +5,23 @@
     -moz-user-select: none;
     -ms-user-select: none;
     user-select: none;
-    cursor: w-resize;
+    cursor: pointer;
+    background-color: #4b4d4e
+}
+
+button::-moz-focus-inner {
+    border: 0;
 }
 
 .cssFade {
     transition: 0.5s linear all;
     opacity: 1;
 }
+
+textarea {
+    resize: none;
+}
+
 .cssFade.ng-hide {
     opacity: 0;
 }
@@ -39,7 +49,7 @@
 #divToDo {
     max-height: max-content;
 }
- 
+
 .list {
     position: absolute;
     top: 4.35rem;
@@ -91,12 +101,20 @@
     line-height: 50px;
 }
 
-.search-bar {
+.todo-form {
+    padding: 10px;
 }
 
-.search-bar input {    
+.todo-form input {    
     width: 100%;
-    height: 80px;
+    height: 55px;
+}
+
+.todo-form textarea {    
+    margin-top:5px;
+    width: 100%;
+    height: 290px;
+    line-height: 30px;
 }
 
 .listSwitcher {
@@ -135,4 +153,26 @@
     font-weight: 500;
     padding: 0px;
     line-height: 1em;
+}
+
+/* Chars Remaining */
+.chars-remaining {
+    font-family: "trebuchet ms";
+    float: right;
+    font-size: 8pt;
+    margin-top: -3%;
+    color: #e5e9e8;
+}
+
+.ng-hide-add, .ng-hide-remove {
+    /* ensure visibility during the transition */
+    display: block !important; /* yes, important */
+}
+
+.cssFade {
+    transition: 0.3s linear all;
+    opacity: 1;
+}
+.cssFade.ng-hide {
+    opacity: 0;
 }

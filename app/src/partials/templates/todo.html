@@ -1,0 +1,63 @@
+<div class="full layout">
+    <div class="page page-center">
+
+        <!-- NAVIGATION BAR -->
+        <div class="topcoat-navigation-bar">
+
+            <!-- SAVE BUTTON -->
+            <div id="saveTodo" class="topcoat-navigation-bar__item left quarter"
+                 ng-click="save()">
+                <button class="topcoat-icon-button--quiet" />
+                <span class="topcoat-icon icomatic">checkmark</span>            
+            </div>
+
+            <!-- TITLE -->
+            <div class="topcoat-navigation-bar__item center half">Fast ToDo</div>
+
+            <!-- CANCEL TODO -->
+            <div id="cancelTodo" class="topcoat-navigation-bar__item right quarter"
+                 data-ng-click="cancel()">
+                <button class="topcoat-icon-button--quiet" />
+                <span class="topcoat-icon icomatic">cancel</span>
+            </div>
+
+        </div>
+
+        <!-- TODO FORM -->
+        <div loader="isLoading"></div>
+        <div class="todo-form" ng-hide="isLoading">
+            
+
+            <!-- TITLE -->
+            <div id="divToDoTitle">
+                <input id="txtToDoTitle" type="text" placeholder="Title" class="topcoat-text-input" maxlength="20"
+                       ng-model="toDo.title"
+                       ng-focus="showRemaining('title')"
+                       ng-blur="showRemaining('title')" />
+                <p>
+                    <small ng-show="isTitleRemainingVisible"
+                           class="chars-remaining">{{ -(toDo.title.length - 20) }} chars remaining..
+                    </small>
+                </p>
+            </div>
+
+            <!-- DESCRIPTION -->
+            <div id="divToDoDescription">
+                <p>
+                    <small class="chars-remaining" ng-show="isDescriptionRemainingVisible">
+                        {{ -(toDo.description.length - 200) }} chars remaining..
+                    </small>
+                </p>
+                <textarea id="txtToDoDescription"
+                          class="topcoat-text-input" maxlength="200" type="text" rows="7" placeholder="Description"
+                          ng-focus="showRemaining('description')"
+                          ng-model="toDo.description"
+                          ng-blur="showRemaining('description')">
+                </textarea>
+
+            </div>
+
+        </div>
+
+    </div>
+</div>

@@ -1,39 +1,39 @@
 {
-  "name": "FastToDo",
-  "version": "0.1.0",
-  "homepage": "https://github.com/felipekm/FastToDo",
-  "authors": [
-    "Felipe Kautzmann <felipe.kautzmann@gmail.com>"
-  ],
-  "description": "A very fast way to organize daily tasks",
-  "main": "app/src/index.html",
-  "keywords": [
-    "AngularJS",
-    "Topcoat",
-    "Mobile",
-    "Javascript",
-    "ToDo"
-  ],
-  "license": "GPL",
-  "private": true,
-  "ignore": [
-    "**/.*",
-    "node_modules",
-    "bower_components",
-    "app/lib",
-    "test",
-    "tests"
-  ],
-  "dependencies": {
-    "angular": "~1.2.12",
-    "angular-route": "~1.2.12",
-    "angular-touch": "~1.2.12",
-    "angular-animate": "~1.2.12",
-    "angular-swipe":  "https://github.com/marmorkuchen-net/angular-swipe.git",
-    "topcoat": "~0.8.0",
-    "angular-bindonce": "~0.3.1",
-    "font-awesome": "~4.0.3",
-    "yepnope": "~1.5.4",
-    "jquery": "~2.1.0"
-  }
+    "name": "FastToDo",
+    "version": "0.2.2",
+    "homepage": "https://github.com/felipekm/FastToDo",
+    "authors": [
+        "Felipe Kautzmann <felipe.kautzmann@gmail.com>"
+    ],
+    "description": "A very fast way to organize daily tasks",
+    "main": "app/src/index.html",
+    "keywords": [
+        "AngularJS",
+        "Topcoat",
+        "Mobile",
+        "Javascript",
+        "ToDo"
+    ],
+    "license": "GPL",
+    "private": true,
+    "ignore": [
+        "**/.*",
+        "node_modules",
+        "bower_components",
+        "app/lib",
+        "test",
+        "tests"
+    ],
+    "dependencies": {
+        "angular": "~1.2.12",
+        "angular-route": "~1.2.12",
+        "angular-touch": "~1.2.12",
+        "angular-animate": "~1.2.12",
+        "angular-swipe":  "https://github.com/marmorkuchen-net/angular-swipe.git",
+        "topcoat": "~0.8.0",
+        "angular-bindonce": "~0.3.1",
+        "font-awesome": "~4.0.3",
+        "yepnope": "~1.5.4",
+        "jquery": "~2.1.0"
+    }
 }
