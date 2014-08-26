@@ -22,7 +22,7 @@
             <!-- DELETE ALL BUTTON -->
             <div id="deleteAllTodo" class="topcoat-navigation-bar__item right quarter cssFade"
                  ng-click="removeAll()"
-                 ng-hide="itemsToBeDone() === 0">
+                 ng-show="todoList.length > 0">
                 <button class="topcoat-icon-button--quiet" />
                 <span class="topcoat-icon icomatic">delete</span>
             </div>

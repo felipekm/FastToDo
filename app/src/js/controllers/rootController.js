@@ -9,32 +9,32 @@ angular.module("FastToDo").controller("RootController", [
         $scope.isHeaderBackAllowed = false;
         $scope.isScopeAddMode = false;
         $scope.isDeleteMode = false;
-        
+
         $rootScope.config = firetodoConfig;
-        
+
         $scope.goBack = function () {
             $window.history.back();
         };
-        
+
         $rootScope.goTo = function goTo(uri) {
             $timeout(function goToLocation() {
                 $location.path(uri);
             }, 0);
         };
-        
+
         $rootScope.enableAnimate = function rootEnableAnimate() {
             $scope.isLayoutAnimated = true;
         };
-        
+
         $rootScope.disableAnimate = function rootDisableAnimate() {
             $scope.isLayoutAnimated = false;
         };
-        
+
         $rootScope.enableHeaderBack = function rootEnableHeader() {
             $scope.isHeaderBackAllowed = true;
             $scope.headerClass = 'half';
         };
-        
+
         $rootScope.disableHeaderBack = function rootDisableHeader() {
             $scope.isHeaderBackAllowed = false;
             $scope.headerClass = 'full';
@@ -42,4 +42,5 @@ angular.module("FastToDo").controller("RootController", [
 
         $rootScope.session = storageFactory('sessionStorage');
         $rootScope.storage = storageFactory('localStorage');
-}]);
+    }
+]);

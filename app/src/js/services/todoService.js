@@ -32,9 +32,9 @@ angular.module("FastToDo").service("todoService", ["$rootScope", "$q", function 
     }
 
     this.save = function save(toDoItem) {
-        var savePromise = $q.defer();
+        var savePromise = $q.defer(),
+            i = 0;
         
-        var i = 0;
         toDoList = self.getAll() || [];
 
         if (!toDoItem.id) {
