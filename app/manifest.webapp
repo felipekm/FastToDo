@@ -1,6 +1,6 @@
 {
     "version": "0.2.2",
-    "name": "FastToDo",
+    "name": "Fast ToDo",
     "launch_path": "/src/index.html",
     "description": "A very fast way to organize daily tasks",
     "icons": {
@@ -18,7 +18,7 @@
     "default_locale": "en",
     "locales": {
         "en": {
-            "name": "FastToDo",
+            "name": "Fast ToDo",
             "description": "A very fast way to organize daily tasks"
         }
     }

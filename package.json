@@ -1,5 +1,5 @@
 {
-  "name": "FastToDo",
+  "name": "Fast ToDo",
   "version": "0.2.2",
   "description": "A very fast way to organize daily tasks",
   "main": "index.js",
@@ -8,7 +8,11 @@
     "url": "https://github.com/felipekm/FastToDo"
   },
   "keywords": [
-    "todo", "firefoxos", "todoapp", "task", "simple"
+    "todo",
+    "firefoxos",
+    "todoapp",
+    "task",
+    "simple"
   ],
   "author": "Felipe Kautzmann",
   "license": "ISC",
@@ -20,11 +24,12 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "devDependencies": {
-    "gulp-util": "~3.0.0",
+    "cordova": "^4.1.2",
     "gulp": "~3.8.6",
-    "gulp-minify-html": "~0.1.4",
+    "gulp-clean": "~0.3.1",
     "gulp-minify-css": "~0.3.7",
+    "gulp-minify-html": "~0.1.4",
     "gulp-uglify": "~0.3.1",
-    "gulp-clean": "~0.3.1"
+    "gulp-util": "~3.0.0"
   }
 }

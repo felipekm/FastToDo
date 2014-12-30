@@ -1,0 +1,28 @@
+0 info it worked if it ends with ok
+1 verbose cli [ 'c:\\Program Files\\nodejs\\node.exe',
+1 verbose cli   'c:\\Program Files\\nodejs\\node_modules\\npm\\bin\\npm-cli.js',
+1 verbose cli   'install',
+1 verbose cli   'cordova',
+1 verbose cli   '--save-dev' ]
+2 info using npm@1.4.28
+3 info using node@v0.10.33
+4 error Error: Invalid name: "Fast ToDo"
+4 error     at ensureValidName (c:\Program Files\nodejs\node_modules\npm\node_modules\read-package-json\node_modules\normalize-package-data\lib\fixer.js:315:15)
+4 error     at Object.module.exports.fixNameField (c:\Program Files\nodejs\node_modules\npm\node_modules\read-package-json\node_modules\normalize-package-data\lib\fixer.js:204:5)
+4 error     at c:\Program Files\nodejs\node_modules\npm\node_modules\read-package-json\node_modules\normalize-package-data\lib\normalize.js:30:38
+4 error     at Array.forEach (native)
+4 error     at normalize (c:\Program Files\nodejs\node_modules\npm\node_modules\read-package-json\node_modules\normalize-package-data\lib\normalize.js:29:15)
+4 error     at final (c:\Program Files\nodejs\node_modules\npm\node_modules\read-package-json\read-json.js:342:33)
+4 error     at then (c:\Program Files\nodejs\node_modules\npm\node_modules\read-package-json\read-json.js:126:33)
+4 error     at c:\Program Files\nodejs\node_modules\npm\node_modules\read-package-json\read-json.js:331:40
+4 error     at evalmachine.<anonymous>:271:14
+4 error     at c:\Program Files\nodejs\node_modules\npm\node_modules\graceful-fs\graceful-fs.js:102:5
+5 error If you need help, you may report this *entire* log,
+5 error including the npm and node versions, at:
+5 error     <http://github.com/npm/npm/issues>
+6 error System Windows_NT 6.2.9200
+7 error command "c:\\Program Files\\nodejs\\node.exe" "c:\\Program Files\\nodejs\\node_modules\\npm\\bin\\npm-cli.js" "install" "cordova" "--save-dev"
+8 error cwd c:\Projetos\Pessoal\FastToDo
+9 error node -v v0.10.33
+10 error npm -v 1.4.28
+11 verbose exit [ 1, true ]

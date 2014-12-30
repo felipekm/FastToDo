@@ -1,30 +1,33 @@
 var gulp = require('gulp')
-, fs = require('fs')
-, minifyHtml= require('gulp-minify-html')
-, minifyCss = require('gulp-minify-css')
-, uglify = require("gulp-uglify")
-, clean = require('gulp-clean');
+    , fs = require('fs')
+    , minifyHtml= require('gulp-minify-html')
+    , minifyCss = require('gulp-minify-css')
+    , uglify = require("gulp-uglify")
+    , clean = require('gulp-clean');
 
 // Copy Files
 gulp.task('copy', function () {
     
     gulp.src('./app/manifest.webapp', { base: './app' })
-    .pipe(gulp.dest('./www/'));
-
+     .pipe(gulp.dest('./app/www/'));
+    
     gulp.src('./app/src/css/*.*', { base: './app/src/css' })
-    .pipe(gulp.dest('./www/src/css/'));
-
+     .pipe(gulp.dest('./app/www/src/css/'));
+    
     gulp.src('./app/images/*.*', { base: './app' })
-    .pipe(gulp.dest('./www/'));    
-
+     .pipe(gulp.dest('./app/www/'));
+    
     gulp.src('./app/lib/**/', { base: './app' })
-    .pipe(gulp.dest('./www/'));
+     .pipe(gulp.dest('./app/www/'));
+    
 });
 
 // Clean
 gulp.task('clean', function () {
+    
     gulp.src('./www/', {read: false})
-    .pipe(clean());
+     .pipe(clean());
+    
 });
 
 // Grouped Minify
@@ -32,15 +35,15 @@ gulp.task('minify', function () {
    
        gulp.src('./app/src/css/*.css')
         .pipe(minifyCss())
-        .pipe(gulp.dest('www/src/css'));
+        .pipe(gulp.dest('./app/www/src/css'));
     
      gulp.src('./app/src/js/**/*.js')
         .pipe(uglify())
-        .pipe(gulp.dest('www/src/js'));
+        .pipe(gulp.dest('./app/www/src/js'));
     
      gulp.src('./app/src/**/*.html')
         .pipe(minifyHtml())
-        .pipe(gulp.dest('www/src/')); 
+        .pipe(gulp.dest('./app/www/src/')); 
 });
 
 // Gulp to run
