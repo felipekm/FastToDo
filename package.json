@@ -1,5 +1,5 @@
 {
-  "name": "Fast ToDo",
+  "name": "FastToDo",
   "version": "0.2.2",
   "description": "A very fast way to organize daily tasks",
   "main": "index.js",
