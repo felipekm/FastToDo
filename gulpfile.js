@@ -7,7 +7,6 @@ var gulp = require('gulp')
 
 // Copy Files
 gulp.task('copy', function () {
-    
     gulp.src('./app/manifest.webapp', { base: './app' })
      .pipe(gulp.dest('./app/www/'));
     
@@ -19,21 +18,17 @@ gulp.task('copy', function () {
     
     gulp.src('./app/lib/**/', { base: './app' })
      .pipe(gulp.dest('./app/www/'));
-    
 });
 
 // Clean
 gulp.task('clean', function () {
-    
     gulp.src('./www/', {read: false})
      .pipe(clean());
-    
 });
 
 // Grouped Minify
 gulp.task('minify', function () {
-   
-       gulp.src('./app/src/css/*.css')
+     gulp.src('./app/src/css/*.css')
         .pipe(minifyCss())
         .pipe(gulp.dest('./app/www/src/css'));
     
