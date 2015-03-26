@@ -1,4 +1,6 @@
-![Alt text](https://marketplace.cdn.mozilla.net/img/uploads/addon_icons/502/502825-64.png?raw=true "FastToDo") Fast ToDo
+![Alt text](https://marketplace.cdn.mozilla.net/img/uploads/addon_icons/502/502825-64.png?raw=true "FastToDo")  Fast ToDo
+
+![FastToDo](https://github.com/felipekm/FastToDo/blob/master/app/images/143071.png?raw=true)
 ========
 The fastest way to organize daily tasks on your Firefox OS device.
 
