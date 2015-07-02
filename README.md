@@ -21,4 +21,4 @@ The License (XXX)
 
 Copyright (c) 2014 Felipe Kautzmann
 
-DO WANNA YOU WANT WITH THIS :)
+DO WANNA YOU WANT WITH THIS :octocat:
