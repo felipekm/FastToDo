@@ -1,3 +1,5 @@
+#### Deprecated since FFOS is not on track anymore.
+
 ![FastToDo](https://github.com/felipekm/FastToDo/blob/master/app/images/logoMkt.png?raw=true)
 
 The fastest way to organize daily tasks on your Firefox OS device.
