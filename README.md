@@ -1,4 +1,4 @@
-#### Deprecated since FFOS is not on track anymore.
+### Deprecated since FFOS is not on track anymore.
 
 ![FastToDo](https://github.com/felipekm/FastToDo/blob/master/app/images/logoMkt.png?raw=true)
 
