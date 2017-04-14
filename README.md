@@ -18,6 +18,4 @@ That works pretty well on the following devices:
 --
 The License (XXX)
 
-Copyright (c) 2014 Felipe Kautzmann
-
-:octocat: All yours.
+2014 [Felipe Kautzmann](http://felipekm.com)
