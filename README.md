@@ -18,4 +18,4 @@ That works pretty well on the following devices:
 --
 The License (XXX)
 
-2014 [Felipe Kautzmann](http://felipekm.com)
+2014 [Felipe Kautzmann](http://felipekm.github.io)
